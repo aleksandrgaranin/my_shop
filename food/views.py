@@ -3,24 +3,40 @@ from django.http import HttpResponse
 from .models import Item
 from django.template import loader
 from .forms import ItemForm
+from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
 
 # Create your views here.
+
+'''Function based view of index
 def index(request):
     item_list = Item.objects.all()
     context = {
         'item_list':item_list,
     }
-    return render(request,'food/index.html',context)
+    return render(request,'food/index.html',context) 
+    '''
+
+class IndexClassView(ListView):
+    model = Item
+    template_name = 'food/index.html'
+    context_object_name = 'item_list'
+
 
 def item(request):
     return HttpResponse('<h1>This is an item view</h1>')
 
+''' Function based view of detail
 def detale(request,item_id):
     item = Item.objects.get(pk=item_id)
     context = {
         'item':item,
     }
     return render(request,'food/detail.html',context)
+'''
+class DetaleClassView(DetailView):
+    model = Item
+    template_name = 'food/detail.html'    
 
 def create_item(request):
     form = ItemForm(request.POST or None)

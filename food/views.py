@@ -39,6 +39,7 @@ class DetaleClassView(DetailView):
     model = Item
     template_name = 'food/detail.html'    
 
+''' Function based view of create item
 def create_item(request):
     form = ItemForm(request.POST or None)
 
@@ -47,6 +48,7 @@ def create_item(request):
         return redirect('food:index')
     
     return render(request,'food/item-form.html',{'form':form})
+    '''
 
 class CreateItem(CreateView):
     model = Item
